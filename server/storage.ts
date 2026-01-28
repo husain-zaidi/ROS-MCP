@@ -1,38 +1,55 @@
-import { type User, type InsertUser } from "@shared/schema";
-import { randomUUID } from "crypto";
-
-// modify the interface with any CRUD methods
-// you might need
+import { db } from "./db";
+import {
+  settings,
+  toolLogs,
+  type Settings,
+  type InsertSettings,
+  type ToolLog,
+} from "@shared/schema";
+import { eq, desc } from "drizzle-orm";
 
 export interface IStorage {
-  getUser(id: string): Promise<User | undefined>;
-  getUserByUsername(username: string): Promise<User | undefined>;
-  createUser(user: InsertUser): Promise<User>;
+  // Settings
+  getSettings(): Promise<Settings>;
+  updateSettings(updates: Partial<InsertSettings>): Promise<Settings>;
+  
+  // Logs
+  createToolLog(log: { toolName: string; arguments: any; result: any; status: string }): Promise<ToolLog>;
+  getToolLogs(): Promise<ToolLog[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-
-  constructor() {
-    this.users = new Map();
+export class DatabaseStorage implements IStorage {
+  async getSettings(): Promise<Settings> {
+    const [existing] = await db.select().from(settings);
+    if (!existing) {
+      const [created] = await db.insert(settings).values({}).returning();
+      return created;
+    }
+    return existing;
   }
 
-  async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+  async updateSettings(updates: Partial<InsertSettings>): Promise<Settings> {
+    const [existing] = await db.select().from(settings);
+    if (!existing) {
+      const [created] = await db.insert(settings).values(updates as InsertSettings).returning();
+      return created;
+    }
+    const [updated] = await db
+      .update(settings)
+      .set(updates)
+      .where(eq(settings.id, existing.id))
+      .returning();
+    return updated;
   }
 
-  async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+  async createToolLog(log: { toolName: string; arguments: any; result: any; status: string }): Promise<ToolLog> {
+    const [entry] = await db.insert(toolLogs).values(log).returning();
+    return entry;
   }
 
-  async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
-    return user;
+  async getToolLogs(): Promise<ToolLog[]> {
+    return await db.select().from(toolLogs).orderBy(desc(toolLogs.createdAt)).limit(50);
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

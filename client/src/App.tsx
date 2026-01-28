@@ -5,12 +5,25 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 
+// Pages
+import Dashboard from "@/pages/Dashboard";
+import Nodes from "@/pages/Nodes";
+import Topics from "@/pages/Topics";
+import Graph from "@/pages/Graph";
+import TfViewer from "@/pages/TfViewer";
+import Settings from "@/pages/Settings";
+import Logs from "@/pages/Logs";
+
 function Router() {
   return (
     <Switch>
-      {/* Add pages below */}
-      {/* <Route path="/" component={Home}/> */}
-      {/* Fallback to 404 */}
+      <Route path="/" component={Dashboard} />
+      <Route path="/nodes" component={Nodes} />
+      <Route path="/topics" component={Topics} />
+      <Route path="/graph" component={Graph} />
+      <Route path="/tf" component={TfViewer} />
+      <Route path="/settings" component={Settings} />
+      <Route path="/logs" component={Logs} />
       <Route component={NotFound} />
     </Switch>
   );
