@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "ros": {
+      "command": "node",
+      "args": ["/mnt/c/Users/husai/Desktop/Code/ROS-MCP/build/index.js"]
+    }
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "servers": {
+    "ros": {
+      "command": "node",
+      "args": ["/absolute/path/to/ROS-MCP/build/index.js"]
+    }
+  }
+}
