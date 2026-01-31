@@ -1,5 +1,5 @@
 {
-  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
   "name": "io.github.husain-zaidi/ros-mcp",
   "description": "MCP for ROS 2 monitoring, debugging, and managing nodes, topics, services, and TF2 frames.",
   "repository": {
@@ -9,8 +9,8 @@
   "version": "1.0.0",
   "packages": [
     {
-      "identifier": "@husain-zaidi/ros-mcp",
-      "registry_type": "npm",
+      "identifier": "ros-mcp",
+      "registryType": "npm",
       "version": "1.0.0",
       "transport": {
         "type": "stdio"
