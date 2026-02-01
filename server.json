@@ -6,12 +6,12 @@
     "url": "https://github.com/husain-zaidi/ROS-MCP",
     "source": "github"
   },
-  "version": "1.0.0",
+  "version": "1.0.1",
   "packages": [
     {
       "identifier": "ros-mcp",
       "registryType": "npm",
-      "version": "1.0.0",
+      "version": "1.0.1",
       "transport": {
         "type": "stdio"
       }

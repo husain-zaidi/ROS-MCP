@@ -1,6 +1,28 @@
 # ROS 2 MCP Server
+![NPM Version](https://img.shields.io/npm/v/ros-mcp)
+[<img src="https://img.shields.io/badge/VS_Code-VS_Code?style=flat-square&label=Install%20Server&color=0098FF" alt="Install in VS Code">](https://insiders.vscode.dev/redirect?url=vscode%3Amcp%2Finstall%3F%257B%2522name%2522%253A%2522ros%2522%252C%2522command%2522%253A%2522npx%2522%252C%2522args%2522%253A%255B%2522ros-mcp%2522%255D%257D)
 
 A Model Context Protocol (MCP) server for ROS 2 that enables GitHub Copilot and other AI agents to interact with ROS 2 systems. This server provides tools for monitoring, debugging, and managing ROS 2 nodes, topics, services, and TF2 frames.
+
+### Quickstart
+
+Add the following to `.vscode/mcp.json`
+
+```json
+{
+  "servers": {
+    "ros": {
+      "command": "npx",
+      "args": ["ros-mcp"]
+    }
+  }
+}
+```
+
+Ensure the server is selected in tools for vs code copilot
+
+You're good to go!
+try "List active ros topics" to test it out.
 
 ## Features
 
@@ -36,7 +58,7 @@ A Model Context Protocol (MCP) server for ROS 2 that enables GitHub Copilot and 
 - Node.js 18+
 - npm or yarn
 
-### Setup
+### Manual Setup
 
 ```bash
 # Clone or navigate to the repository
@@ -184,6 +206,7 @@ Agent: "Let me check if any node is having issues"
 - Live rqt plugin integration
 - Rviz2 data streaming
 - Custom message type parsing
+- CLI
 
 ## License
 

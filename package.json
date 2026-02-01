@@ -1,6 +1,6 @@
 {
   "name": "ros-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "mcpName": "io.github.husain-zaidi/ros-mcp",
   "description": "A Model Context Protocol (MCP) server for ROS 2 that enables AI agents to interact with ROS 2 systems",
   "main": "index.js",
